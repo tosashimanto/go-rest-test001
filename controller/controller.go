@@ -10,8 +10,10 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/tosashimanto/go-rest-test001/controller/handler"
+	"github.com/tosashimanto/go-rest-test001/micro_service"
 	"github.com/tosashimanto/go-rest-test001/micro_service/gateway"
 	"github.com/tosashimanto/go-rest-test001/micro_service/users"
+	"github.com/tosashimanto/go-rest-test001/util"
 	"net/http"
 	"os"
 	"time"
@@ -44,7 +46,7 @@ func Init() {
 	api.GET("/list/:construction_id/drawings", handler.GetDrawings)
 	// 4. Pile一覧取得
 	api.GET("/list/:construction_id/piles", handler.Piles)
-	// 5. 杭変更依頼
+	// 5. 変更依頼
 	// 6. 判定レコード作成
 	api.POST("/judgements", handler.PostJudge)
 	// 7. 判定履歴取得
@@ -59,8 +61,14 @@ func Init() {
 	api.PUT("/upload", handler.UploadImage)
 
 	// Server.Router().Add(http.MethodGet, "/users/:name",micro_service.TestServiceHandler)
-	// api.GET("/users/:name", micro_service.TestServiceHandler)
+	api.GET("/users/:name", micro_service.TestServiceHandler)
 	// Server.Use(micro_service.CustomMiddleware("Test"))
+
+	/**
+	 * Route確認
+	 */
+	data, _ := json.MarshalIndent(Server.Routes(), "", "  ")
+	util.JSONFormatOut(data)
 }
 
 func TestMicroService() {
@@ -103,7 +111,7 @@ func TestMicroService() {
 	for _, v := range userinstances {
 		r := mux.NewRouter()
 		srv := users.Logging(logger, v)(usrv)
-		r.Handle("/{name}", httptransport.NewServer(
+		r.Handle("/:name", httptransport.NewServer(
 			users.NewEndpoints(srv).UserByName,
 			decodeUserByNameRequest,
 			encodeResponse))

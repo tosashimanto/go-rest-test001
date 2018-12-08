@@ -22,7 +22,9 @@ func NewEndpoints(srv UserService) *Endpoints {
 }
 
 /**
+ * Endpoint作成
  * サービスをhttpハンドラにする
+ *
  * 戻り値 Endpoint
  */
 func makeUserByNameEndpoint(svc UserService) endpoint.Endpoint {

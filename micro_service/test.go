@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-func CustomMiddleware(name string) echo.MiddlewareFunc {
+func CustomMiddleware(name string, e *echo.Echo) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 
@@ -50,15 +50,22 @@ func CustomMiddleware(name string) echo.MiddlewareFunc {
 			//	ReadTimeout:  15 * time.Second,
 			//}
 
+			/**
+			 *
+			 */
 			usrv := users.NewService()
 			userinstances := []string{"localhost:8081"}
 			for _, v := range userinstances {
 				r := mux.NewRouter()
 				srv := users.Logging(logger, v)(usrv)
+
+				// エンドポイントを httptransport を使ってhandlerをbind
 				r.Handle("/:name", httptransport.NewServer(
 					users.NewEndpoints(srv).UserByName,
 					decodeUserByNameRequest,
 					encodeResponse))
+
+				// Service用HTTPサーバー
 				s := &http.Server{
 					Handler: r,
 					Addr:    v,

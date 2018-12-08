@@ -15,7 +15,7 @@ var (
 	ErrNotFound = errors.New("users not found.")
 )
 
-// サービスを作る
+// サービス作成
 type UserService interface {
 	UserByName(ctx context.Context, name string) (*User, error)
 }

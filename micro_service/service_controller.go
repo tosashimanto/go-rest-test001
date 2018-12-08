@@ -54,7 +54,7 @@ func ConnectMicroService() {
 	for _, v := range userinstances {
 		r := mux.NewRouter()
 		srv := users.Logging(logger, v)(usrv)
-		r.Handle("/{name}", httptransport.NewServer(
+		r.Handle("/:name", httptransport.NewServer(
 			users.NewEndpoints(srv).UserByName,
 			decodeUserByNameRequest,
 			encodeResponse))
