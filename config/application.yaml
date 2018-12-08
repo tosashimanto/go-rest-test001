@@ -1,0 +1,8 @@
+app_name: go-rest-test001
+version: 1.0.0
+env: dev
+
+BUCKETEER_AWS_ACCESS_KEY_ID: xxxxxxxxxxxx
+BUCKETEER_AWS_REGION: us-east-1
+BUCKETEER_AWS_SECRET_ACCESS_KEY: xxxxxxxxxxxxxxxxxxxxxxxxxx
+BUCKETEER_BUCKET_NAME: bucketeer-xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx

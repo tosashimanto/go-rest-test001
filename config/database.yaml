@@ -1,0 +1,38 @@
+dev:
+  adapter: mysql
+  database: rest_api_test001_dev
+  username: root
+  password:
+  host: localhost
+  port: 3306
+  idle_conns: 10
+  open_conns: 100
+  redis:
+    address: localhost:6379
+    password:
+  mongodb:
+    database: rest_api_test001_dev
+    path: localhost
+    max_pool: 20
+
+staging:
+  adapter: mysql
+  database: rest_api_test001_stag
+  username: root
+  password:
+  host: localhost
+  port: 3306
+  idle_conns: 10
+  open_conns: 100
+
+prod:
+  adapter: postgres
+  database: rest_api_test001_prod
+  username: postgres
+  password: postgres
+  host: localhost
+  port: 5432
+  sslmode: disable
+  idle_conns: 10
+  open_conns: 100
+
