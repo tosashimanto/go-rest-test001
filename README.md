@@ -6,10 +6,11 @@
 |項目     |内容                          |       |
 |--------|------------------------------|------|
 |REST    |AW  S3　put 擬似               |済み   |
-|        |JSON valueをNullまたは空にする   |未対応   |
+|        |JSON valueをNullまたは空にする方法 |対応未   |
 |        |Websocket                     |済み   |
-|microservice |Gorilla/mux http tranport --> Echo/Gin http tranport|未対応   |
-|yaml/構成定義   | viper            |済み   |
+|microservice |                         |済み   |
+|             |HTTP Transport<br>(Gorilla/mux http tranport --> Echo/Gin http tranport)|対応未   |
+|yaml/構成定義   |viper使用 )             |済み   |
 |O/R mapper |Gorm connection pool |
 |Docker   　|                      |済み   |
 
