@@ -147,13 +147,12 @@ func Piles(c echo.Context) error {
 		Index:        2,
 		JudgedNumber: 0,
 	}
-	// 杭情報
+	// Pile情報
 	var pileArray [2]model.Pile
 	pileArray[0] = model.Pile{
 		PileId:            9999001,
 		PileNumber:        101,
 		MachineNumber:     101,
-		PlannedCoreNumber: 5,
 		Note:              "これはメモです。",
 		RegisteredDate:    "2018/12/31",
 		CollectionStopped: false,
@@ -166,7 +165,6 @@ func Piles(c echo.Context) error {
 		PileId:            9999002,
 		PileNumber:        102,
 		MachineNumber:     102,
-		PlannedCoreNumber: 5,
 		Note:              "これはメモです。その２",
 		RegisteredDate:    "2018/11/02",
 		CollectionStopped: false,
@@ -189,7 +187,7 @@ func Piles(c echo.Context) error {
 	return c.JSON(http.StatusOK, piles)
 }
 
-// 5. 杭変更依頼
+// 5. 変更依頼
 
 // 6. 判定レコード作成
 func PostJudge(c echo.Context) error {
@@ -240,69 +238,69 @@ func setTrimImageArray(pileId int64, index int64) *model.JudgeResponse {
 	return judgeResponse
 }
 
-// 7. 判定履歴取得
+// 7. 履歴取得
 
 // 8. 判定実行
 func PutJudge(c echo.Context) error {
 
-	judgementId := c.Param("judgement_id")
-	fmt.Println("judgement_id=", judgementId)
+	judgementId := c.Param("judge_id")
+	fmt.Println("judge_id=", judgementId)
 
 	var trimmedCoreImageArray [11]model.JudgeResultTrimmedCoreImage
 	trimmedCoreImageArray[0] = model.JudgeResultTrimmedCoreImage{
-		Position:           1,
-		TrimmedCoreImageId: 999901,
-		ImageResult:        0,
+		Position:    1,
+		CoreImageId: 999901,
+		ImageResult: 0,
 	}
 	trimmedCoreImageArray[1] = model.JudgeResultTrimmedCoreImage{
-		Position:           2,
-		TrimmedCoreImageId: 999902,
-		ImageResult:        0,
+		Position:    2,
+		CoreImageId: 999902,
+		ImageResult: 0,
 	}
 	trimmedCoreImageArray[2] = model.JudgeResultTrimmedCoreImage{
-		Position:           3,
-		TrimmedCoreImageId: 999903,
-		ImageResult:        1,
+		Position:    3,
+		CoreImageId: 999903,
+		ImageResult: 1,
 	}
 	trimmedCoreImageArray[3] = model.JudgeResultTrimmedCoreImage{
-		Position:           4,
-		TrimmedCoreImageId: 999904,
-		ImageResult:        1,
+		Position:    4,
+		CoreImageId: 999904,
+		ImageResult: 1,
 	}
 	trimmedCoreImageArray[4] = model.JudgeResultTrimmedCoreImage{
-		Position:           5,
-		TrimmedCoreImageId: 999905,
-		ImageResult:        0,
+		Position:    5,
+		CoreImageId: 999905,
+		ImageResult: 0,
 	}
 	trimmedCoreImageArray[5] = model.JudgeResultTrimmedCoreImage{
-		Position:           6,
-		TrimmedCoreImageId: 999905,
-		ImageResult:        0,
+		Position:    6,
+		CoreImageId: 999905,
+		ImageResult: 0,
 	}
 	trimmedCoreImageArray[6] = model.JudgeResultTrimmedCoreImage{
-		Position:           7,
-		TrimmedCoreImageId: 999905,
-		ImageResult:        0,
+		Position:    7,
+		CoreImageId: 999905,
+		ImageResult: 0,
 	}
 	trimmedCoreImageArray[7] = model.JudgeResultTrimmedCoreImage{
-		Position:           8,
-		TrimmedCoreImageId: 999905,
-		ImageResult:        0,
+		Position:    8,
+		CoreImageId: 999905,
+		ImageResult: 0,
 	}
 	trimmedCoreImageArray[8] = model.JudgeResultTrimmedCoreImage{
-		Position:           9,
-		TrimmedCoreImageId: 999905,
-		ImageResult:        0,
+		Position:    9,
+		CoreImageId: 999905,
+		ImageResult: 0,
 	}
 	trimmedCoreImageArray[9] = model.JudgeResultTrimmedCoreImage{
-		Position:           10,
-		TrimmedCoreImageId: 999905,
-		ImageResult:        0,
+		Position:    10,
+		CoreImageId: 999905,
+		ImageResult: 0,
 	}
 	trimmedCoreImageArray[10] = model.JudgeResultTrimmedCoreImage{
-		Position:           11,
-		TrimmedCoreImageId: 999905,
-		ImageResult:        0,
+		Position:    11,
+		CoreImageId: 999905,
+		ImageResult: 0,
 	}
 
 	judgeResult := &model.JudgeResult{
@@ -316,11 +314,11 @@ func PutJudge(c echo.Context) error {
 	return c.JSON(http.StatusOK, judgeResult)
 }
 
-// 9. チェック結果登録
+// 9. 結果登録
 func PostReJudge(c echo.Context) error {
 
-	judgementId := c.Param("judgement_id")
-	fmt.Println("judgement_id=", judgementId)
+	judgementId := c.Param("judge_id")
+	fmt.Println("judge_id=", judgementId)
 
 	postReJudgeResult := new(model.PostReJudgeResult)
 	if err := c.Bind(postReJudgeResult); err != nil {
@@ -329,7 +327,7 @@ func PostReJudge(c echo.Context) error {
 	fmt.Println("CheckResultArray len=", len(postReJudgeResult.CheckResultArray))
 	for i := 0; i < len(postReJudgeResult.CheckResultArray); i++ {
 		fmt.Printf("No.%d CheckItemId=%d\n", i+1, postReJudgeResult.CheckResultArray[i].CheckItemId)
-		fmt.Printf("No.%d CoreImageId=%d\n", i+1, postReJudgeResult.CheckResultArray[i].TrimmedCoreImageId)
+		fmt.Printf("No.%d ImageId=%d\n", i+1, postReJudgeResult.CheckResultArray[i].TrimmedCoreImageId)
 		fmt.Printf("No.%d CheckStatus=%t\n", i+1, postReJudgeResult.CheckResultArray[i].CheckStatus)
 	}
 
@@ -389,7 +387,7 @@ func PostReJudge(c echo.Context) error {
 	return c.JSON(http.StatusOK, reJudgeResultResponse)
 }
 
-// 10. チェックシート取得
+// 10. Checksheet取得
 func GetCheckSheet(c echo.Context) error {
 	const checkItemNo = 4
 	var checkItemrray [checkItemNo]model.CheckItem

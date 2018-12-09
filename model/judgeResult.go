@@ -10,7 +10,7 @@ type JudgeResult struct {
 
 // 判定用コア画像
 type JudgeResultTrimmedCoreImage struct {
-	Position           int64 `json:"position"`           // 全長コア内位置
-	TrimmedCoreImageId int64 `json:"trimmedCoreImageId"` // 判定用コア画像ID
-	ImageResult        int64 `json:"imageResult"`        // 0=○, 1=△, 2=×
+	Position    int64 `json:"position"`           // 全長コア内位置
+	CoreImageId int64 `json:"trimmedCoreImageId"` // 判定用コア画像ID
+	ImageResult int64 `json:"imageResult"`        // 0=○, 1=△, 2=×
 }
