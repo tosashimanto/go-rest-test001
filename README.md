@@ -18,13 +18,18 @@
 
 
 ### Go環境
-
+* package管理 dep前提
+```
 docker build .
+  
+  ...
   
   Successfully built <コンテナID>
 
 docker run -p 8080:8080 -td <コンテナID>
-docker ps -a
+
+
+```
 
 
 
