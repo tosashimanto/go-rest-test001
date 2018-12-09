@@ -3,16 +3,18 @@
 
 ### 概要
 
-|項目     |内容                          |       |
-|--------|------------------------------|------|
-|REST    |AW  S3　put 擬似               |済み   |
-|        |JSON valueをNullまたは空にする方法 |対応未   |
-|        |Websocket                     |済み   |
-|microservice |                         |済み   |
-|             |HTTP Transport<br>(Gorilla/mux http tranport --> Echo/Gin http tranport)|対応未   |
-|yaml/構成定義   |viper使用              |済み   |
-|O/R mapper |Gorm connection pool |
-|Docker   　|                      |済み   |
+|項目     |内容                          |対応状況 |備考    |
+|--------|------------------------------|--------|-------|
+|REST    |JWT対応                       |済み   |        |
+|        |AWS 署名付きS3 Put返却         |済み   |        |
+|        |AWS S3 Put擬似                |済み   |        |
+|        |JSON valueをNullまたは空にする方法 |対応未   |    |
+|        |Websocket                     |済み   |    |
+|microservice |                         |済み   |    |
+|             |HTTP Transport<br>(Gorilla/mux http tranport --> Echo/Gin http tranport)|対応未 |    |
+|yaml/構成定義読み込み |viper使用              |済み   |    |
+|O/R mapper |Gorm connection pool |済み   |    |
+|Docker   　|                      |済み   |    |
 
 
 ### Go環境
