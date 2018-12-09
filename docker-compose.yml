@@ -10,11 +10,11 @@ services:
     build:
       context: .
       dockerfile: ./docker-compose/golang
-    volumes:
-    - ./src/api:/go/src/api
-    - vendor:/go/src/api/vendor
-    ports:
-    - 8080:8080
+#    volumes:
+#    - ./src/api:/go/src/github.com/tosashimanto/go-rest-test001
+#    - vendor:/go/src/github.com/tosashimanto/go-rest-test001/vendor
+#    ports:
+#    - 8080:8080
     tty:
       true
 
