@@ -11,7 +11,7 @@
 |microservice |Gorilla/mux http tranport --> Echo/Gin http tranport|未対応   |
 |yaml/構成定義   | viper            |済み   |
 |O/R mapper |Gorm connection pool |
-|Docker   　|                      |未対応   |
+|Docker   　|                      |済み   |
 
 
 ### Go環境
