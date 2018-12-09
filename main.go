@@ -22,5 +22,5 @@ func main() {
 	controller.Server.Logger.Fatal(controller.Server.Start(":8080"))
 
 	// microservice start
-	// micro_service.ConnectMicroService()
+	// microservice_tranport.ConnectMicroService()
 }
