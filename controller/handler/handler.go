@@ -45,42 +45,42 @@ func GetToken(c echo.Context) error {
 	})
 }
 
-// 2. 工事一覧取得
+// 2. 一覧取得
 func Constructions(c echo.Context) error {
 	var constructionArray [5]model.Construction
 	constructionArray[0] = model.Construction{
 		ConstructionId:    1,
 		ExecutionNum:      "100000000012345",
-		PropertyName:      "○○様 ○○建設工事その1",
-		Address:           "東京都中央区XX-X1",
+		PropertyName:      "PropertyName その1",
+		Address:           "東京都XX-X1",
 		ConstManagerPhone: "000-0000-0000",
 	}
 	constructionArray[1] = model.Construction{
 		ConstructionId:    2,
 		ExecutionNum:      "100000000012346",
-		PropertyName:      "○○様 ○○建設工事その2",
-		Address:           "東京都中央区XX-X2",
+		PropertyName:      "PropertyName その2",
+		Address:           "東京都XX-X2",
 		ConstManagerPhone: "000-0000-0002",
 	}
 	constructionArray[2] = model.Construction{
 		ConstructionId:    3,
 		ExecutionNum:      "100000000012347",
-		PropertyName:      "○○様 ○○建設工事その4",
-		Address:           "東京都中央区XX-X4",
+		PropertyName:      "PropertyName その4",
+		Address:           "東京都XX-X4",
 		ConstManagerPhone: "000-0000-0003",
 	}
 	constructionArray[3] = model.Construction{
 		ConstructionId:    4,
 		ExecutionNum:      "100000000012348",
-		PropertyName:      "○○様 ○○建設工事その5",
-		Address:           "東京都中央区XX-X5",
+		PropertyName:      "PropertyName その5",
+		Address:           "東京都XX-X5",
 		ConstManagerPhone: "000-0000-0004",
 	}
 	constructionArray[4] = model.Construction{
 		ConstructionId:    5,
 		ExecutionNum:      "100000000012349",
-		PropertyName:      "○○様 ○○建設工事その6",
-		Address:           "東京都中央区XX-X6",
+		PropertyName:      "PropertyName その6",
+		Address:           "東京都XX-X6",
 		ConstManagerPhone: "000-0000-0006",
 	}
 	constructions := &model.Constructions{
@@ -105,7 +105,7 @@ func GetDrawings(c echo.Context) error {
 
 	var drawingArray [2]model.Drawing
 	drawingArray[0] = model.Drawing{
-		DrawingName:  "○○工面図.jpg",
+		DrawingName:  "○○図.jpg",
 		ReferenceUrl: "https://",
 	}
 
@@ -152,16 +152,11 @@ func Piles(c echo.Context) error {
 	pileArray[0] = model.Pile{
 		PileId:            9999001,
 		PileNumber:        101,
-		PileDepthUpper:    1.20,
-		PileDepthLower:    12.20,
 		MachineNumber:     101,
 		PlannedCoreNumber: 5,
 		Note:              "これはメモです。",
 		RegisteredDate:    "2018/12/31",
 		CollectionStopped: false,
-		SurveyGroupNumber: 1,
-		TargetLayerUpper:  0.40,
-		TargetLayerLower:  2.40,
 		FullCoreArray: []model.FullCore{
 			fullCoreArray[0],
 			fullCoreArray[1],
@@ -170,16 +165,11 @@ func Piles(c echo.Context) error {
 	pileArray[1] = model.Pile{
 		PileId:            9999002,
 		PileNumber:        102,
-		PileDepthUpper:    2.20,
-		PileDepthLower:    13.20,
 		MachineNumber:     102,
 		PlannedCoreNumber: 5,
 		Note:              "これはメモです。その２",
 		RegisteredDate:    "2018/11/02",
 		CollectionStopped: false,
-		SurveyGroupNumber: 2,
-		TargetLayerUpper:  0.40,
-		TargetLayerLower:  2.40,
 		FullCoreArray: []model.FullCore{
 			fullCoreArray[2],
 			fullCoreArray[3],
@@ -208,7 +198,7 @@ func PostJudge(c echo.Context) error {
 	if err := c.Bind(judgePost); err != nil {
 		return err
 	}
-	fmt.Println("PileId=", judgePost.PileId)
+	fmt.Println("Id=", judgePost.PileId)
 	fmt.Println("Index=", judgePost.Index)
 
 	judgeResponse := setTrimImageArray(judgePost.PileId, judgePost.Index)
@@ -218,14 +208,14 @@ func PostJudge(c echo.Context) error {
 	return c.JSON(http.StatusOK, judgeResponse)
 }
 
-// 6.1 判定レコード作成応答のコア情報作成
+// 6.1 判定レコード作成応答
 func setTrimImageArray(pileId int64, index int64) *model.JudgeResponse {
 	const trimImageNum = 11
 
 	var trimmedCoreImageArray [trimImageNum]model.TrimmedCoreImage
 	for i := 0; i < len(trimmedCoreImageArray); i++ {
 		// 画像Upload URL
-		objectKey := fmt.Sprintf("PileId_%d_Index_%d_Position_%d", pileId, index, i)
+		objectKey := fmt.Sprintf("Id_%d_Index_%d_Position_%d", pileId, index, i)
 		fmt.Println("objectKey=", objectKey)
 		uploadUrl, uploadUrlErr := s3.NewPutPreSignedS3URL(objectKey)
 		if uploadUrlErr != nil {
@@ -262,61 +252,61 @@ func PutJudge(c echo.Context) error {
 	trimmedCoreImageArray[0] = model.JudgeResultTrimmedCoreImage{
 		Position:           1,
 		TrimmedCoreImageId: 999901,
-		ImageResult:        0, // 0=○, 1=△, 2=×
+		ImageResult:        0,
 	}
 	trimmedCoreImageArray[1] = model.JudgeResultTrimmedCoreImage{
 		Position:           2,
 		TrimmedCoreImageId: 999902,
-		ImageResult:        0, // 0=○, 1=△, 2=×
+		ImageResult:        0,
 	}
 	trimmedCoreImageArray[2] = model.JudgeResultTrimmedCoreImage{
 		Position:           3,
 		TrimmedCoreImageId: 999903,
-		ImageResult:        1, // 0=○, 1=△, 2=×
+		ImageResult:        1,
 	}
 	trimmedCoreImageArray[3] = model.JudgeResultTrimmedCoreImage{
 		Position:           4,
 		TrimmedCoreImageId: 999904,
-		ImageResult:        1, // 0=○, 1=△, 2=×
+		ImageResult:        1,
 	}
 	trimmedCoreImageArray[4] = model.JudgeResultTrimmedCoreImage{
 		Position:           5,
 		TrimmedCoreImageId: 999905,
-		ImageResult:        0, // 0=○, 1=△, 2=×
+		ImageResult:        0,
 	}
 	trimmedCoreImageArray[5] = model.JudgeResultTrimmedCoreImage{
 		Position:           6,
 		TrimmedCoreImageId: 999905,
-		ImageResult:        0, // 0=○, 1=△, 2=×
+		ImageResult:        0,
 	}
 	trimmedCoreImageArray[6] = model.JudgeResultTrimmedCoreImage{
 		Position:           7,
 		TrimmedCoreImageId: 999905,
-		ImageResult:        0, // 0=○, 1=△, 2=×
+		ImageResult:        0,
 	}
 	trimmedCoreImageArray[7] = model.JudgeResultTrimmedCoreImage{
 		Position:           8,
 		TrimmedCoreImageId: 999905,
-		ImageResult:        0, // 0=○, 1=△, 2=×
+		ImageResult:        0,
 	}
 	trimmedCoreImageArray[8] = model.JudgeResultTrimmedCoreImage{
 		Position:           9,
 		TrimmedCoreImageId: 999905,
-		ImageResult:        0, // 0=○, 1=△, 2=×
+		ImageResult:        0,
 	}
 	trimmedCoreImageArray[9] = model.JudgeResultTrimmedCoreImage{
 		Position:           10,
 		TrimmedCoreImageId: 999905,
-		ImageResult:        0, // 0=○, 1=△, 2=×
+		ImageResult:        0,
 	}
 	trimmedCoreImageArray[10] = model.JudgeResultTrimmedCoreImage{
 		Position:           11,
 		TrimmedCoreImageId: 999905,
-		ImageResult:        0, // 0=○, 1=△, 2=×
+		ImageResult:        0,
 	}
 
 	judgeResult := &model.JudgeResult{
-		CoreResult:            2, // 0=OK, 1=NG, 2=未確定, 3=条件付きOK
+		CoreResult:            2,
 		TrimmedCoreImageArray: trimmedCoreImageArray[:],
 	}
 	jsonString, _ := json.Marshal(judgeResult)
@@ -339,58 +329,58 @@ func PostReJudge(c echo.Context) error {
 	fmt.Println("CheckResultArray len=", len(postReJudgeResult.CheckResultArray))
 	for i := 0; i < len(postReJudgeResult.CheckResultArray); i++ {
 		fmt.Printf("No.%d CheckItemId=%d\n", i+1, postReJudgeResult.CheckResultArray[i].CheckItemId)
-		fmt.Printf("No.%d TrimmedCoreImageId=%d\n", i+1, postReJudgeResult.CheckResultArray[i].TrimmedCoreImageId)
+		fmt.Printf("No.%d CoreImageId=%d\n", i+1, postReJudgeResult.CheckResultArray[i].TrimmedCoreImageId)
 		fmt.Printf("No.%d CheckStatus=%t\n", i+1, postReJudgeResult.CheckResultArray[i].CheckStatus)
 	}
 
 	var dividedCoreArray [11]model.ReJudgeResultDividedCore
 	dividedCoreArray[0] = model.ReJudgeResultDividedCore{
 		Position: 1,
-		Result:   0, // 0=○, 1=△, 2=×
+		Result:   0,
 	}
 	dividedCoreArray[1] = model.ReJudgeResultDividedCore{
 		Position: 2,
-		Result:   0, // 0=○, 1=△, 2=×
+		Result:   0,
 	}
 	dividedCoreArray[2] = model.ReJudgeResultDividedCore{
 		Position: 3,
-		Result:   2, // 0=○, 1=△, 2=×
+		Result:   2,
 	}
 	dividedCoreArray[3] = model.ReJudgeResultDividedCore{
 		Position: 4,
-		Result:   0, // 0=○, 1=△, 2=×
+		Result:   0,
 	}
 	dividedCoreArray[4] = model.ReJudgeResultDividedCore{
 		Position: 5,
-		Result:   0, // 0=○, 1=△, 2=×
+		Result:   0,
 	}
 	dividedCoreArray[5] = model.ReJudgeResultDividedCore{
 		Position: 6,
-		Result:   0, // 0=○, 1=△, 2=×
+		Result:   0,
 	}
 	dividedCoreArray[6] = model.ReJudgeResultDividedCore{
 		Position: 7,
-		Result:   0, // 0=○, 1=△, 2=×
+		Result:   0,
 	}
 	dividedCoreArray[7] = model.ReJudgeResultDividedCore{
 		Position: 8,
-		Result:   0, // 0=○, 1=△, 2=×
+		Result:   0,
 	}
 	dividedCoreArray[8] = model.ReJudgeResultDividedCore{
 		Position: 9,
-		Result:   0, // 0=○, 1=△, 2=×
+		Result:   0,
 	}
 	dividedCoreArray[9] = model.ReJudgeResultDividedCore{
 		Position: 10,
-		Result:   0, // 0=○, 1=△, 2=×
+		Result:   0,
 	}
 	dividedCoreArray[10] = model.ReJudgeResultDividedCore{
 		Position: 11,
-		Result:   0, // 0=○, 1=△, 2=×
+		Result:   0,
 	}
 
 	reJudgeResultResponse := &model.ReJudgeResultResponse{
-		Result:           0, // 0=OK, 1=NG, 2=未確定, 3=条件付きOK
+		Result:           0,
 		DividedCoreArray: dividedCoreArray[:],
 	}
 	jsonString, _ := json.Marshal(reJudgeResultResponse)
