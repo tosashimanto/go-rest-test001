@@ -1,7 +1,17 @@
 
 # Go testアプリ
 
-### 課題
+### 概要
+
+|項目     |内容                          |       |
+|--------|------------------------------|------|
+|REST    |AW  S3　put 擬似               |済み   |
+|        |JSON valueをNullまたは空にする   |未対応   |
+|        |Websocket                     |済み   |
+|microservice |Gorilla/mux http tranport --> Echo/Gin http tranport|未対応   |
+|yaml/構成定義   | viper            |済み   |
+|O/R mapper |Gorm connection pool |
+|Docker   　|                      |未対応   |
 
 
 ### Go環境
