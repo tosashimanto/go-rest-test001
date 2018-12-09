@@ -10,7 +10,7 @@
 |        |Websocket                     |済み   |
 |microservice |                         |済み   |
 |             |HTTP Transport<br>(Gorilla/mux http tranport --> Echo/Gin http tranport)|対応未   |
-|yaml/構成定義   |viper使用 )             |済み   |
+|yaml/構成定義   |viper使用              |済み   |
 |O/R mapper |Gorm connection pool |
 |Docker   　|                      |済み   |
 
