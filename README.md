@@ -10,7 +10,8 @@
 |        |AWS S3 Put擬似                |済み   |        |
 |        |JSON valueをNullまたは空にする方法 |対応未   |    |
 |        |Websocket                     |済み   |    |
-|microservice |                         |済み   |    |
+|        |Firebase tokenチェック          |済み   |    |
+|microservice(go-kit base) |             |済み   |    |
 |             |HTTP Transport<br>(Gorilla/mux http tranport --> Echo/Gin http tranport)|対応未 |    |
 |yaml/構成定義読み込み |viper使用              |済み   |    |
 |O/R mapper |Gorm connection pool |済み   |    |
