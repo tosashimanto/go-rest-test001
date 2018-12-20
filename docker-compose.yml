@@ -2,30 +2,40 @@ version: '3'
 
 # マウント時に vendor 以下を削除してしまうため、別 volume を指定する
 # Gopkg.toml を編集する場合、vendor ボリュームも削除しイメージを再構築する
-volumes:
-  vendor:
+#volumes:
+#  vendor:
+#
+#services:
+#  rest:
+#    build:
+#      context: .
+#      dockerfile: ./docker-compose/golang
+#
+#
+##    volumes:
+##    - ./src/api:/go/src/github.com/tosashimanto/go-rest-test001
+##    - vendor:/go/src/github.com/tosashimanto/go-rest-test001/vendor
+##    ports:
+##    - 8080:8080
+#
+#    tty:
+#      true
 
-services:
-  rest:
-    build:
-      context: .
-      dockerfile: ./docker-compose/golang
-#    volumes:
-#    - ./src/api:/go/src/github.com/tosashimanto/go-rest-test001
-#    - vendor:/go/src/github.com/tosashimanto/go-rest-test001/vendor
-#    ports:
-#    - 8080:8080
-    tty:
-      true
 
-  postgresql:
-    build: ./docker-compose/postgresql
+
+  mysql:
+    build: ./docker-compose/mysql
     ports:
-    - "5432:5432"
-    environment:
-      POSTGRES_USER: "tosashimanto"
-      POSTGRES_PASSWORD: "123456"
-      POSTGRES_DB: "go_test001"
-      TZ: "UTC"
+    - "3306:3306"
+
+#  postgresql:
+#    build: ./docker-compose/postgresql
+#    ports:
+#    - "5432:5432"
+#    environment:
+#      POSTGRES_USER: "tosashimanto"
+#      POSTGRES_PASSWORD: "123456"
+#      POSTGRES_DB: "go_test001"
+#      TZ: "UTC"
 
 
