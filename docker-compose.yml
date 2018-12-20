@@ -5,7 +5,9 @@ version: '3'
 #volumes:
 #  vendor:
 #
-#services:
+
+services:
+
 #  rest:
 #    build:
 #      context: .
@@ -27,13 +29,18 @@ version: '3'
     build: ./docker-compose/mysql
     ports:
     - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: tosashimanto1
+      MYSQL_PASSWORD: 123456
+      MYSQL_DATABASE: go_test002
 
 #  postgresql:
 #    build: ./docker-compose/postgresql
 #    ports:
 #    - "5432:5432"
 #    environment:
-#      POSTGRES_USER: "tosashimanto"
+#      POSTGRES_USER: "tosashimanto2"
 #      POSTGRES_PASSWORD: "123456"
 #      POSTGRES_DB: "go_test001"
 #      TZ: "UTC"
