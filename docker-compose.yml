@@ -35,14 +35,14 @@ services:
       MYSQL_PASSWORD: 123456
       MYSQL_DATABASE: go_test001
 
-#  postgresql:
-#    build: ./docker-compose/postgresql
-#    ports:
-#    - "5432:5432"
-#    environment:
-#      POSTGRES_USER: "tosashimanto2"
-#      POSTGRES_PASSWORD: "123456"
-#      POSTGRES_DB: "go_test002"
-#      TZ: "UTC"
+  postgresql:
+    build: ./docker-compose/postgresql
+    ports:
+    - "5432:5432"
+    environment:
+      POSTGRES_USER: "tosashimanto2"
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_DB: "go_test002"
+      TZ: "UTC"
 
 
