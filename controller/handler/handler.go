@@ -21,7 +21,6 @@ func GetToken(c echo.Context) error {
 		return err
 	}
 	fmt.Println("Token=", tokenPost.Token)
-	fmt.Println("Type=", tokenPost.Type)
 
 	// Create token(JWT)
 	token := jwt.New(jwt.SigningMethodHS256)

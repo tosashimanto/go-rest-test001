@@ -11,6 +11,7 @@
 |        |JSON valueをNullまたは空にする方法 |対応未   |    |
 |        |Websocket                     |済み   |    |
 |        |Firebase tokenチェック          |済み   |    |
+|protocol buffers |                    |対応未   |    |
 |microservice(gRPC)|                    |対応未   |    |
 |microservice(go-kit base) |             |済み   |    |
 |             |HTTP Transport<br>(Gorilla/mux http tranport --> Echo/Gin http tranport)|対応未 |    |
@@ -62,4 +63,40 @@ docker run -p 8080:8080 -td <コンテナID>
 ```
   go build main.go
   go run main.go
+```
+
+### Heroku
+
+```
+heroku login
+```
+
+
+* Heroku側にappを作成
+
+```
+heroku apps:create go-rest-test001 --buildpack heroku/go
+heroku open --app go-rest-test001
+```
+
+
+* Herokuにデプロイ
+```
+git push heroku master
+
+git remote -v
+heroku	https://git.heroku.com/go-rest-test001.git (fetch)
+heroku	https://git.heroku.com/go-rest-test001.git (push)
+
+```
+
+* ログ確認
+```
+heroku logs --tail
+```
+
+* アクセス例
+```
+https://rocky-castle-914423.herokuapp.com/xxx
+
 ```

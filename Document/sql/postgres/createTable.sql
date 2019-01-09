@@ -8,7 +8,7 @@ CREATE SCHEMA public;
 DROP TABLE IF exists test002;
 
 CREATE TABLE test002 (
-    testID bigserial primary key,
+    id bigserial primary key,
     value integer null,
     name varchar(300) null,
     createdBy bigint not null,
@@ -17,6 +17,8 @@ CREATE TABLE test002 (
     updatedAt timestamp with time zone not null default (now() at time zone 'utc')
 );
 
+
+DROP TABLE IF exists account;
 
 -- アカウントテーブル
 CREATE TABLE account (
@@ -34,6 +36,8 @@ COMMENT ON COLUMN account.role_id IS       'ロールID';
 COMMENT ON COLUMN account.operator_id IS   '作業員ID';
 COMMENT ON COLUMN account.firebase_id IS   'FirebaseID';
 
+
+DROP TABLE IF exists role;
 -- ロールテーブル
 CREATE TABLE role (
     id bigserial PRIMARY KEY,
