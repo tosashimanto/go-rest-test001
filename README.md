@@ -1,5 +1,5 @@
 
-# Go testアプリ
+## GoLang test
 
 ### 概要
 
